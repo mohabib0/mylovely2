@@ -47,31 +47,26 @@
   background:#fff;
   border-radius:30px;
   padding:14px;
-  box-shadow:
-    0 15px 35px rgba(255,47,146,.35),
-    0 0 0 1px rgba(255,255,255,.7);
-  overflow: visible; /* خلي المحتوى يظهر بالكامل */
+  box-shadow: 0 15px 35px rgba(255,47,146,.35), 0 0 0 1px rgba(255,255,255,.7);
+  overflow: visible; /* يسمح للصورة بأن تظهر بالكامل */
 }
 
     .photo-box{
   width: 100%;
   border-radius: 22px;
-  /* نحتفظ بالغلاف لعمل الزوايا المستديرة */
-  overflow: hidden;
-  display: flex;
-  justify-content: center; /* يمركز الصورة عرضياً لو كانت أضيق من الكارد */
-  align-items: flex-start; /* يبدأ من فوق */
-  background: #000; /* خلفية سودا علشان مايبقاش فروق لونية */
+  overflow: visible; /* مهم: لا نقطع الصورة هنا */
+  display: block;
+  background: #000; /* للخلفية السوداء حول الصور العمودية */
 }
 
     .photo-box img{
   display: block;
-  width: auto;         /* لا نفرض عرض ثابت يطبّع القص */
-  max-width: 100%;     /* لا تتجاوز عرض الكارد */
-  height: auto;        /* احترم نسبة الارتفاع الأصلية */
-  max-height: none;    /* مهم - ممكن يكون في قواعد أخرى بتقلل الارتفاع */
-  object-fit: none;    /* ما نعطيش object-fit:cover/contain اللي يغيّر القص */
+  width: 100%;    /* تملأ عرض الكارد */
+  height: auto;   /* تحافظ على نسبة الارتفاع الأصلية */
+  border-radius: 22px; /* زوايا مستديرة على الصورة نفسها */
+  max-width: 100%;
 }
+      
 
     .memory-caption{
       margin-top:10px;
@@ -170,6 +165,7 @@
 
 </body>
 </html>
+
 
 
 
