@@ -1,152 +1,168 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حبيبتي</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ذكرياتنا - كامل</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ---- قاعدة نظيفة للصياغة ---- */
     *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      height: auto;            /* مهم: لا نجبر الارتفاع على 100vh */
+      min-height: 100%;
+      overflow-y: auto;        /* تأكد من وجود تمرير عمودي عند الحاجة */
+    }
+
     body{
       font-family:"Tajawal",sans-serif;
-      min-height:100vh;
-      background:linear-gradient(180deg,#ffd2e8,#ffecf5);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-      padding:40px 20px;
+      background: linear-gradient(180deg,#ff9fd1,#ffc7e4);
+      color: #222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: 30px 12px;      /* مسافة من الأطراف للتمرير */
+      display: block;          /* شطبنا flex لتفادي قيود التمرير */
     }
 
-    /* 💗 أنيميشن القلوب المتحركة */
-    .floating-heart {
-      position: absolute;
-      font-size: 35px;
-      opacity: 0.8;
-      animation: floatUp 6s linear forwards;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(40px) scale(1) rotate(0deg);
-        opacity: 0.6;
-      }
-      25% {
-        transform: translateY(0px) scale(1.2) rotate(10deg);
-        opacity: 0.9;
-      }
-      50% {
-        transform: translateY(-40px) scale(1) rotate(-10deg);
-        opacity: 1;
-      }
-      75% {
-        transform: translateY(-70px) scale(1.3) rotate(5deg);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-120px) scale(0.8) rotate(-5deg);
-        opacity: 0;
-      }
-    }
-
-    .content-box{
-      max-width:480px;
+    .wrapper{
       width:100%;
-      z-index:2;
+      max-width:450px;
+      margin: 0 auto;         /* يوسّط الصفحة */
+      padding-bottom: 40px;
     }
 
-    h1{
-      font-size:2rem;
-      color:#d6256a;
+    .header{
+      text-align:center;
       margin-bottom:18px;
-      font-weight:700;
+      color:#ff2f92;
+    }
+    .header h1{ font-size:1.6rem; margin-bottom:6px; }
+    .header p{ font-size:.95rem; color:#7a184e; }
+
+    .memory-list{
+      display:block;
+      gap:20px;
     }
 
-    p{
-      font-size:1.1rem;
-      line-height:1.9;
-      color:#6d234b;
-      margin-bottom:10px;
+    /* --------------------
+       الكارد: يسمح بارتفاع الصورة بالكامل
+       -------------------- */
+    .memory-card{
+      background:#fff;
+      border-radius:30px;
+      padding:12px;
+      margin-bottom:20px;
+      box-shadow:0 15px 35px rgba(255,47,146,.18), 0 0 0 1px rgba(255,255,255,.5);
+      /* مهم: لا نحد max-height، ونخلي overflow مرئي لطول الصورة */
+      overflow: visible;
     }
 
-    .btn{
-      margin-top:25px;
-      padding:12px 40px;
-      background:linear-gradient(90deg,#ff2f92,#ff6fb0);
-      color:#fff;
-      border:none;
-      border-radius:999px;
-      font-size:1rem;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:0 16px 35px rgba(255,47,146,.45);
+    /* غلاف الصورة: نستخدم overflow:visible عشان الصورة ما تتقصش.
+       نطبق الزوايا المستديرة على الصورة نفسها (border-radius) بدل أن يُقصّها الغلاف. */
+    .photo-box{
+      width:100%;
+      background:#000; /* لملء الفراغ الجانبي على الهواتف */
+      display:block;
+      border-radius: 0; /* نطبق الزوايا على الصورة نفسها */
+      overflow: visible;
     }
 
-    .footer{
-      margin-top:30px;
-      font-size:1.3rem;
-      color:#d6256a;
-      font-weight:600;
-      opacity:.8;
-      font-family:cursive;
+    /* الصورة: أهم صفات هنا تَحتَرِم نسبة العرض/الارتفاع الأصلية
+       وتعرض الصورة كاملة. */
+    .photo-box img{
+      display: block;
+      width: 100%;       /* تملأ عرض الكارد (لا تملأ ارتفاعًا بالقوة) */
+      height: auto;      /* تحافظ على نسبة الارتفاع الأصلية */
+      max-width: 100%;
+      border-radius: 22px; /* زوايا الصورة */
+      object-fit: none;     /* نتجنب سلوك cover/contain الذي قد يقطع الصورة */
+      -webkit-user-drag: none;
+    }
+
+    /* نص التوضيح */
+    .memory-caption{
+      margin-top:10px;
+      font-size:.95rem;
+      text-align:center;
+      color:#444;
+      font-weight:500;
+    }
+
+    .final-section{
+      margin-top:26px;
+      text-align:center;
+      padding:18px 12px 10px;
+    }
+    .final-text{ font-size:1rem; color:#7a184e; margin-bottom:14px; font-weight:600; }
+    .final-btn{
+      border:none; outline:none; padding:12px 40px; border-radius:999px; font-size:1rem; font-weight:600;
+      cursor:pointer; color:#fff; background:linear-gradient(90deg,#a855f7,#ec4899);
+      box-shadow:0 16px 40px rgba(168,85,247,.25);
+    }
+
+    /* تحسين عرض الصور الصغيرة داخل الكارد (لو في صور أضيق من العرض) */
+    @media (max-width:420px){
+      .wrapper{ padding: 20px 10px; }
+      .photo-box img{ border-radius:18px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ❤️ القلوب الأساسية -->
-  <div class="floating-heart" style="top: 80%; left: 15%;">💗</div>
-  <div class="floating-heart" style="top: 85%; left: 70%; animation-delay: 1s;">💖</div>
-  <div class="floating-heart" style="top: 90%; left: 40%; animation-delay: 2s;">💓</div>
-  <div class="floating-heart" style="top: 95%; left: 25%; animation-delay: 3s;">💕</div>
-  <div class="floating-heart" style="top: 88%; left: 60%; animation-delay: 4s;">💞</div>
+  <div class="wrapper">
 
-  <div class="content-box">
+    <div class="header">
+      <h1>ذكرياتنا الحلوة</h1>
+      <p>كل لحظة هنا ليها معنى ❤️</p>
+    </div>
 
-    <h1>حبيبتي</h1>
+    <div class="memory-list">
 
-    <p>بحبك ربنا يخليكي ليا</p>
-    <p>ومهما الدنيا تبعدنا هنفضل دايما سوا</p>
-    <p>انتي كل حاجه ليا</p>
-    <p>ومقدرش إني أزعلك</p>
-    <p>وحشتيني</p>
+      <!-- الصورة 1 (استبدل بالاسم الفعلي) -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo_2025-12-11_23-54-53.jpg" alt="ذكريات 1">
+        </div>
+        <p class="memory-caption">اجمل واحده شافتها عيني ربنا يخليكي ليا ❤️</p>
+      </div>
 
-    <button class="btn" onclick="restart()">restart</button>
+      <!-- الصورة 2 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo_2025-12-11_23-55-00.jpg" alt="ذكريات 2">
+        </div>
+        <p class="memory-caption">اجمل ضحكه في الدنيا ربنا يديمها يا نور عيني ❤️</p>
+      </div>
 
-    <div class="footer">Lovelyyy</div>
+      <!-- الصورة 3 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo_2025-12-11_23-55-19.jpg" alt="ذكريات 3">
+        </div>
+        <p class="memory-caption">اشطر دكتوره كده كده ❤️</p>
+      </div>
+
+      <!-- الصورة 4 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo_2025-12-11_23-55-10.jpg" alt="ذكريات 4">
+        </div>
+        <p class="memory-caption">بحبك حب مش هيتكرر في الدنيا يا اجمل واحن حد عليا ❤️</p>
+      </div>
+
+    </div>
+
+    <div class="final-section">
+      <p class="final-text">✨ في حاجة مهمة عايز أقولها لك ✨</p>
+      <button class="final-btn" onclick="goImportant()">❤️ دوسي هنا ❤️</button>
+    </div>
+
   </div>
 
-  <!-- ❤️ سكربت لتوليد قلوب جديدة بشكل مستمر -->
   <script>
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("floating-heart");
-      heart.innerHTML = "💗";
-
-      // أماكن عشوائية للقلوب
-      heart.style.left = Math.random() * 100 + "%";
-      heart.style.top = "100%";
-      heart.style.fontSize = (30 + Math.random() * 25) + "px";
-      heart.style.opacity = Math.random();
-
-      document.body.appendChild(heart);
-
-      // حذف القلب بعد انتهاء الأنيميشن
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }
-
-    // توليد قلب جديد كل 700ms ❤️
-    setInterval(createHeart, 700);
-
-    function restart(){
-      window.location.href = "index.html";
-    }
+    function goImportant(){ window.location.href = "important.html"; }
   </script>
 
 </body>
