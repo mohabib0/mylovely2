@@ -38,38 +38,40 @@
     }
 
     .memory-list{
-      display:flex;
-      flex-direction:column;
-      gap:28px;
-    }
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
 
     .memory-card{
-      background:#fff;
-      border-radius:30px;
-      padding:14px;
-      box-shadow:
-        0 15px 35px rgba(255,47,146,.35),
-        0 0 0 1px rgba(255,255,255,.7);
-      overflow: visible;
-    }
+  background:#fff;
+  border-radius:30px;
+  padding:14px;
+  box-shadow:
+    0 15px 35px rgba(255,47,146,.35),
+    0 0 0 1px rgba(255,255,255,.7);
+  overflow: visible; /* خلي المحتوى يظهر بالكامل */
+}
 
     .photo-box{
-      width: 100%;
-      overflow: hidden;
-      border-radius: 22px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
+  width: 100%;
+  border-radius: 22px;
+  /* نحتفظ بالغلاف لعمل الزوايا المستديرة */
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* يمركز الصورة عرضياً لو كانت أضيق من الكارد */
+  align-items: flex-start; /* يبدأ من فوق */
+  background: #000; /* خلفية سودا علشان مايبقاش فروق لونية */
+}
 
     .photo-box img{
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      max-height: none;
-      object-fit: none;
-    }
+  display: block;
+  width: auto;         /* لا نفرض عرض ثابت يطبّع القص */
+  max-width: 100%;     /* لا تتجاوز عرض الكارد */
+  height: auto;        /* احترم نسبة الارتفاع الأصلية */
+  max-height: none;    /* مهم - ممكن يكون في قواعد أخرى بتقلل الارتفاع */
+  object-fit: none;    /* ما نعطيش object-fit:cover/contain اللي يغيّر القص */
+}
 
     .memory-caption{
       margin-top:10px;
@@ -168,6 +170,7 @@
 
 </body>
 </html>
+
 
 
 
