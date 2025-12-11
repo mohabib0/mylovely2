@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter Password</title>
+
+  <!-- خطوط -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    body{
+      min-height:100vh;
+      font-family:"Tajawal",sans-serif;
+      background:linear-gradient(180deg,#ff9fd1,#ffc7e4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:30px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* قلوب خلفية خفيفة */
+    .bg-heart{
+      position:absolute;
+      font-size:70px;
+      opacity:.18;
+      animation: float 10s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .bg-heart:nth-child(1){top:5%;left:10%}
+    .bg-heart:nth-child(2){top:20%;right:5%;animation-delay:1.5s}
+    .bg-heart:nth-child(3){bottom:8%;left:18%;animation-delay:3s}
+    .bg-heart:nth-child(4){bottom:15%;right:15%;animation-delay:4.5s}
+
+    @keyframes float{
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-15px);}
+      100%{transform:translateY(0);}
+    }
+
+    /* الكرت الأساسي */
+    .card{
+      width:100%;
+      max-width:420px;
+      background:#fff;
+      border-radius:36px;
+      padding:26px 22px 24px;
+      box-shadow:
+        0 24px 55px rgba(255,47,146,.35),
+        0 0 0 1px rgba(255,255,255,.9);
+      text-align:center;
+      position:relative;
+    }
+
+    .lock-icon{
+      font-size:2.3rem;
+      margin-bottom:8px;
+    }
+
+    .title-en{
+      font-family:"Pacifico",cursive;
+      font-size:1.9rem;
+      color:#ff2f92;
+      margin-bottom:4px;
+    }
+
+    .subtitle-en{
+      font-size:1rem;
+      color:#ff4fa4;
+      margin-bottom:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+    }
+
+    .subtitle-en span.heart{
+      font-size:1.2rem;
+    }
+
+    .input-wrapper{
+      position:relative;
+      margin-bottom:16px;
+    }
+
+    .input-wrapper::before{
+      content:"💗";
+      position:absolute;
+      left:14px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:1.1rem;
+      opacity:.7;
+      pointer-events:none;
+    }
+
+    input[type="password"]{
+      width:100%;
+      padding:10px 40px 10px 44px; /* مساحة للقلب والـ dots */
+      border-radius:999px;
+      border:2px solid #ff8ac9;
+      outline:none;
+      font-size:1.05rem;
+      text-align:center;
+      direction:ltr;
+      background:#fff;
+      color:#333;
+      box-shadow:0 0 0 3px rgba(255,255,255,.7);
+    }
+
+    input[type="password"]::placeholder{
+      color:#ffb5dd;
+    }
+
+    input[type="password"]:focus{
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,.9),
+        0 0 0 6px rgba(255,138,201,.35);
+    }
+
+    .btn{
+      margin-top:10px;
+      width:100%;
+      border:none;
+      border-radius:999px;
+      padding:11px 16px;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(90deg,#ff2f92,#ff6fb0);
+      color:#fff;
+      box-shadow:0 18px 40px rgba(255,47,146,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+    }
+
+    .btn span.emoji{
+      font-size:1.1rem;
+    }
+
+    .error{
+      margin-top:8px;
+      font-size:.85rem;
+      color:#e11d48;
+      min-height:18px;
+    }
+
+    .hint-ar{
+      margin-top:10px;
+      font-size:.85rem;
+      color:#7a184e;
+      opacity:.9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- قلوب خلفية -->
+  <div class="bg-heart">💗</div>
+  <div class="bg-heart">💖</div>
+  <div class="bg-heart">💓</div>
+  <div class="bg-heart">💕</div>
+
+  <div class="card">
+    <div class="lock-icon">🔒</div>
+
+    <div class="title-en">Enter Password</div>
+    <div class="subtitle-en">
+      <span class="heart">💝</span>
+      <span>Unlock</span>
+    </div>
+
+    <form id="passwordForm">
+      <div class="input-wrapper">
+        <input
+          type="password"
+          id="password"
+          placeholder="•••"
+          autocomplete="off"
+        />
+      </div>
+
+      <button type="submit" class="btn">
+        <span class="emoji">💞</span>
+        <span>دخول</span>
+      </button>
+
+      <div class="error" id="errorMsg"></div>
+    </form>
+
+    <div class="hint-ar">اكتبي الباسورد السري عشان نبدأ الرحلة الحلوة سوا 💗</div>
+  </div>
+
+  <script>
+    // غيّر كلمة السر هنا
+    const CORRECT_PASSWORD = "1922006"; // مثال زي اللي في الصورة، عدّلها لو حابب
+    const REDIRECT_URL = "love.html"; // الصفحة اللي بعدها
+
+    const form = document.getElementById("passwordForm");
+    const passwordInput = document.getElementById("password");
+    const errorMsg = document.getElementById("errorMsg");
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const value = passwordInput.value.trim();
+
+      if(!value){
+        errorMsg.textContent = "اكتبي كلمة السر الأول يا حلوة 💕";
+        return;
+      }
+
+      if(value === CORRECT_PASSWORD){
+        errorMsg.textContent = "";
+        window.location.href = REDIRECT_URL;
+      }else{
+        errorMsg.textContent = "كلمة السر مش صح 😅";
+      }
+    });
+
+    // Enter يساوي Submit
+    passwordInput.addEventListener("keyup", function(e){
+      if(e.key === "Enter"){
+        form.dispatchEvent(new Event("submit"));
+      }
+    });
+  </script>
+</body>
+</html>

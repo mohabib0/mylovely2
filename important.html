@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حبيبتي</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:"Tajawal",sans-serif;
+      min-height:100vh;
+      background:linear-gradient(180deg,#ffd2e8,#ffecf5);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      padding:40px 20px;
+    }
+
+    /* 💗 أنيميشن القلوب المتحركة */
+    .floating-heart {
+      position: absolute;
+      font-size: 35px;
+      opacity: 0.8;
+      animation: floatUp 6s linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(40px) scale(1) rotate(0deg);
+        opacity: 0.6;
+      }
+      25% {
+        transform: translateY(0px) scale(1.2) rotate(10deg);
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateY(-40px) scale(1) rotate(-10deg);
+        opacity: 1;
+      }
+      75% {
+        transform: translateY(-70px) scale(1.3) rotate(5deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-120px) scale(0.8) rotate(-5deg);
+        opacity: 0;
+      }
+    }
+
+    .content-box{
+      max-width:480px;
+      width:100%;
+      z-index:2;
+    }
+
+    h1{
+      font-size:2rem;
+      color:#d6256a;
+      margin-bottom:18px;
+      font-weight:700;
+    }
+
+    p{
+      font-size:1.1rem;
+      line-height:1.9;
+      color:#6d234b;
+      margin-bottom:10px;
+    }
+
+    .btn{
+      margin-top:25px;
+      padding:12px 40px;
+      background:linear-gradient(90deg,#ff2f92,#ff6fb0);
+      color:#fff;
+      border:none;
+      border-radius:999px;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 16px 35px rgba(255,47,146,.45);
+    }
+
+    .footer{
+      margin-top:30px;
+      font-size:1.3rem;
+      color:#d6256a;
+      font-weight:600;
+      opacity:.8;
+      font-family:cursive;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ❤️ القلوب الأساسية -->
+  <div class="floating-heart" style="top: 80%; left: 15%;">💗</div>
+  <div class="floating-heart" style="top: 85%; left: 70%; animation-delay: 1s;">💖</div>
+  <div class="floating-heart" style="top: 90%; left: 40%; animation-delay: 2s;">💓</div>
+  <div class="floating-heart" style="top: 95%; left: 25%; animation-delay: 3s;">💕</div>
+  <div class="floating-heart" style="top: 88%; left: 60%; animation-delay: 4s;">💞</div>
+
+  <div class="content-box">
+
+    <h1>حبيبتي</h1>
+
+    <p>بحبك ربنا يخليكي ليا</p>
+    <p>ومهما الدنيا تبعدنا هنفضل دايما سوا</p>
+    <p>انتي كل حاجه ليا</p>
+    <p>ومقدرش إني أزعلك</p>
+    <p>وحشتيني</p>
+
+    <button class="btn" onclick="restart()">restart</button>
+
+    <div class="footer">Lovelyyy</div>
+  </div>
+
+  <!-- ❤️ سكربت لتوليد قلوب جديدة بشكل مستمر -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.innerHTML = "💗";
+
+      // أماكن عشوائية للقلوب
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.top = "100%";
+      heart.style.fontSize = (30 + Math.random() * 25) + "px";
+      heart.style.opacity = Math.random();
+
+      document.body.appendChild(heart);
+
+      // حذف القلب بعد انتهاء الأنيميشن
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    // توليد قلب جديد كل 700ms ❤️
+    setInterval(createHeart, 700);
+
+    function restart(){
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

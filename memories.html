@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ذكرياتنا</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:"Tajawal",sans-serif;
+      min-height:100vh;
+      background:linear-gradient(180deg,#ff9fd1,#ffc7e4);
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrapper{
+      width:100%;
+      max-width:450px;
+      padding:70px 14px 40px;
+    }
+
+    .header{
+      text-align:center;
+      margin-bottom:20px;
+      color:#ff2f92;
+    }
+    .header h1{
+      font-size:1.6rem;
+      margin-bottom:6px;
+    }
+    .header p{
+      font-size:.9rem;
+      color:#7a184e;
+    }
+
+    .memory-list{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .memory-card{
+      background:#fff;
+      border-radius:30px;
+      padding:14px 14px 12px;
+      box-shadow:
+        0 15px 35px rgba(255,47,146,.35),
+        0 0 0 1px rgba(255,255,255,.7);
+    }
+
+    .photo-box{
+      width:100%;
+      height:220px;
+      overflow:hidden;
+      border-radius:22px;
+    }
+
+    .photo-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .memory-caption{
+      margin-top:10px;
+      font-size:.95rem;
+      text-align:center;
+      color:#444;
+      font-weight:500;
+    }
+
+    .final-section{
+      margin-top:26px;
+      text-align:center;
+      padding:18px 12px 10px;
+    }
+
+    .final-text{
+      font-size:1rem;
+      color:#7a184e;
+      margin-bottom:14px;
+      font-weight:600;
+    }
+
+    .final-btn{
+      border:none;
+      outline:none;
+      padding:12px 40px;
+      border-radius:999px;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(90deg,#a855f7,#ec4899);
+      box-shadow:0 16px 40px rgba(168,85,247,.45);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <div class="header">
+      <h1>ذكرياتنا الحلوة</h1>
+      <p>كل لحظة هنا ليها معنى ❤️</p>
+    </div>
+
+    <div class="memory-list">
+
+      <!-- صورة 1 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="C:\Users\alesraa\Desktop\lovely\1.jpeg" alt="ذكريات 1">
+        </div>
+        <p class="memory-caption">أول مرة نتكلم مع بعض</p>
+      </div>
+
+      <!-- صورة 2 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo2.jpg" alt="ذكريات 2">
+        </div>
+        <p class="memory-caption">فاكرة اليوم ده؟</p>
+      </div>
+
+      <!-- صورة 3 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo3.jpg" alt="ذكريات 3">
+        </div>
+        <p class="memory-caption">كان يوم تحفة</p>
+      </div>
+
+      <!-- صورة 4 -->
+      <div class="memory-card">
+        <div class="photo-box">
+          <img src="photo4.jpg" alt="ذكريات 4">
+        </div>
+        <p class="memory-caption">يوم ما عرفنا إننا بنحب بعض</p>
+      </div>
+
+    </div>
+
+    <!-- آخر جزء -->
+    <div class="final-section">
+      <p class="final-text">✨ في حاجة مهمة عايز أقولها لك ✨</p>
+      <button class="final-btn" onclick="goImportant()">❤️ دوسي هنا ❤️</button>
+    </div>
+
+  </div>
+
+  <script>
+    function goImportant(){
+      window.location.href = "important.html";
+    }
+  </script>
+
+</body>
+</html>
