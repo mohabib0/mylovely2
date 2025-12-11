@@ -1,74 +1,87 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ذكرياتنا</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ذكرياتنا - كامل</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ---- قاعدة نظيفة للصياغة ---- */
     *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      height: auto;            /* مهم: لا نجبر الارتفاع على 100vh */
+      min-height: 100%;
+      overflow-y: auto;        /* تأكد من وجود تمرير عمودي عند الحاجة */
+    }
+
     body{
       font-family:"Tajawal",sans-serif;
-      min-height:100vh;
-      background:linear-gradient(180deg,#ff9fd1,#ffc7e4);
-      display:flex;
-      justify-content:center;
+      background: linear-gradient(180deg,#ff9fd1,#ffc7e4);
+      color: #222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: 30px 12px;      /* مسافة من الأطراف للتمرير */
+      display: block;          /* شطبنا flex لتفادي قيود التمرير */
     }
 
     .wrapper{
       width:100%;
       max-width:450px;
-      padding:70px 14px 40px;
+      margin: 0 auto;         /* يوسّط الصفحة */
+      padding-bottom: 40px;
     }
 
     .header{
       text-align:center;
-      margin-bottom:20px;
+      margin-bottom:18px;
       color:#ff2f92;
     }
-    .header h1{
-      font-size:1.6rem;
-      margin-bottom:6px;
-    }
-    .header p{
-      font-size:.9rem;
-      color:#7a184e;
-    }
+    .header h1{ font-size:1.6rem; margin-bottom:6px; }
+    .header p{ font-size:.95rem; color:#7a184e; }
 
     .memory-list{
-      display:flex;
-      flex-direction:column;
+      display:block;
       gap:20px;
     }
 
-    /* === أهم تعديل هنا === */
+    /* --------------------
+       الكارد: يسمح بارتفاع الصورة بالكامل
+       -------------------- */
     .memory-card{
       background:#fff;
       border-radius:30px;
-      padding:14px;
-      box-shadow:0 15px 35px rgba(255,47,146,.35),0 0 0 1px rgba(255,255,255,.7);
-      overflow:visible;   /* يسمح بظهور الصورة كاملة */
+      padding:12px;
+      margin-bottom:20px;
+      box-shadow:0 15px 35px rgba(255,47,146,.18), 0 0 0 1px rgba(255,255,255,.5);
+      /* مهم: لا نحد max-height، ونخلي overflow مرئي لطول الصورة */
+      overflow: visible;
     }
 
-    /* الغلاف */
+    /* غلاف الصورة: نستخدم overflow:visible عشان الصورة ما تتقصش.
+       نطبق الزوايا المستديرة على الصورة نفسها (border-radius) بدل أن يُقصّها الغلاف. */
     .photo-box{
       width:100%;
-      border-radius:22px;
-      overflow:visible;  /* لا يقطع الصورة */
-      background:#000;   /* خلفية لو الصورة عمودية */
+      background:#000; /* لملء الفراغ الجانبي على الهواتف */
       display:block;
+      border-radius: 0; /* نطبق الزوايا على الصورة نفسها */
+      overflow: visible;
     }
 
-    /* الصورة — هنا السحر */
+    /* الصورة: أهم صفات هنا تَحتَرِم نسبة العرض/الارتفاع الأصلية
+       وتعرض الصورة كاملة. */
     .photo-box img{
-      width:100%;       /* عرض الكارد */
-      height:auto;      /* احترم نسبة الارتفاع الأصلية */
-      display:block;
-      border-radius:22px;
+      display: block;
+      width: 100%;       /* تملأ عرض الكارد (لا تملأ ارتفاعًا بالقوة) */
+      height: auto;      /* تحافظ على نسبة الارتفاع الأصلية */
+      max-width: 100%;
+      border-radius: 22px; /* زوايا الصورة */
+      object-fit: none;     /* نتجنب سلوك cover/contain الذي قد يقطع الصورة */
+      -webkit-user-drag: none;
     }
 
+    /* نص التوضيح */
     .memory-caption{
       margin-top:10px;
       font-size:.95rem;
@@ -82,27 +95,18 @@
       text-align:center;
       padding:18px 12px 10px;
     }
-
-    .final-text{
-      font-size:1rem;
-      color:#7a184e;
-      margin-bottom:14px;
-      font-weight:600;
-    }
-
+    .final-text{ font-size:1rem; color:#7a184e; margin-bottom:14px; font-weight:600; }
     .final-btn{
-      border:none;
-      outline:none;
-      padding:12px 40px;
-      border-radius:999px;
-      font-size:1rem;
-      font-weight:600;
-      cursor:pointer;
-      color:#fff;
-      background:linear-gradient(90deg,#a855f7,#ec4899);
-      box-shadow:0 16px 40px rgba(168,85,247,.45);
+      border:none; outline:none; padding:12px 40px; border-radius:999px; font-size:1rem; font-weight:600;
+      cursor:pointer; color:#fff; background:linear-gradient(90deg,#a855f7,#ec4899);
+      box-shadow:0 16px 40px rgba(168,85,247,.25);
     }
 
+    /* تحسين عرض الصور الصغيرة داخل الكارد (لو في صور أضيق من العرض) */
+    @media (max-width:420px){
+      .wrapper{ padding: 20px 10px; }
+      .photo-box img{ border-radius:18px; }
+    }
   </style>
 </head>
 <body>
@@ -116,34 +120,34 @@
 
     <div class="memory-list">
 
-      <!-- صورة 1 -->
+      <!-- الصورة 1 (استبدل بالاسم الفعلي) -->
       <div class="memory-card">
         <div class="photo-box">
-          <img src="photo_1.jpg" alt="ذكريات 1">
+          <img src="photo_2025-12-11_23-54-53.jpg" alt="ذكريات 1">
         </div>
         <p class="memory-caption">اجمل واحده شافتها عيني ربنا يخليكي ليا ❤️</p>
       </div>
 
-      <!-- صورة 2 -->
+      <!-- الصورة 2 -->
       <div class="memory-card">
         <div class="photo-box">
-          <img src="photo_2.jpg" alt="ذكريات 2">
+          <img src="photo_2025-12-11_23-55-00.jpg" alt="ذكريات 2">
         </div>
         <p class="memory-caption">اجمل ضحكه في الدنيا ربنا يديمها يا نور عيني ❤️</p>
       </div>
 
-      <!-- صورة 3 -->
+      <!-- الصورة 3 -->
       <div class="memory-card">
         <div class="photo-box">
-          <img src="photo_3.jpg" alt="ذكريات 3">
+          <img src="photo_2025-12-11_23-55-19.jpg" alt="ذكريات 3">
         </div>
         <p class="memory-caption">اشطر دكتوره كده كده ❤️</p>
       </div>
 
-      <!-- صورة 4 -->
+      <!-- الصورة 4 -->
       <div class="memory-card">
         <div class="photo-box">
-          <img src="photo_4.jpg" alt="ذكريات 4">
+          <img src="photo_2025-12-11_23-55-10.jpg" alt="ذكريات 4">
         </div>
         <p class="memory-caption">بحبك حب مش هيتكرر في الدنيا يا اجمل واحن حد عليا ❤️</p>
       </div>
@@ -158,9 +162,7 @@
   </div>
 
   <script>
-    function goImportant(){
-      window.location.href = "important.html";
-    }
+    function goImportant(){ window.location.href = "important.html"; }
   </script>
 
 </body>
